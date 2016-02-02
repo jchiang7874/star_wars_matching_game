@@ -1,0 +1,92 @@
+@font-face {
+    font-family: starJediFont;
+    src: url(fonts/Starjedi.ttf);
+}
+
+@font-face {
+    font-family: starOutline;
+    src: url(fonts/Starjout.ttf);
+}
+
+h2, #counter {
+    font-family: 'starOutline', serif;
+    text-align: center;
+}
+
+#word {
+    color: #0c0c0d;
+    text-shadow: 2px 2px #5a6a82;
+}
+
+.default {
+    width: 600px;
+    display: block;
+    margin: 20px auto;
+}
+
+#game_wrapper {
+    max-width: 770px;
+    max-height: 644;
+    background: url('imgs/hyperspace1.jpeg') no-repeat fixed;
+    background-size: cover;
+    padding: 20px 20px 20px 25px;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+
+#btn_wrapper {
+    text-align: center;
+}
+
+button {
+    margin: 10px;
+    padding: 0;
+    background: none;
+    border: 3px inset #505254;
+    border-radius: 5px;
+    cursor: url(imgs/lightsaber.png), auto;
+}
+
+button:focus {
+    outline: none;
+}
+
+button:hover {
+    -webkit-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(0.9);
+}
+
+.tile_border {
+    width: 95px;
+    height: 95px;
+    margin: 15px;
+    display: inline-flex;
+    border-radius: 5px;
+    border: 1px solid #8E8E8E;
+    cursor: url(imgs/lightsaber.png), auto;
+}
+
+.tile_border.master {
+    margin: 5px 15px;
+}
+
+.bkground, .img_tiles{
+    width: 95px;
+    height: 95px;
+    border-radius: 5px;
+}
+
+
+
+.bkground {
+    content: url('imgs/starwarsbkground.png');
+    border-radius: 5px;
+}
+
+#counter {
+    font-size: 30px;
+    color: #ffe819;
+    margin: 0 0 10px 0;
+}
+
