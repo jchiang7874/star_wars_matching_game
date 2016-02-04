@@ -8,26 +8,33 @@
     src: url(fonts/Starjout.ttf);
 }
 
-h2, #counter {
+body {
+    min-width: 850px;
+}
+
+h1, h2, #counter {
     font-family: 'starOutline', serif;
     text-align: center;
 }
 
-#word {
-    color: #0c0c0d;
-    text-shadow: 2px 2px #5a6a82;
+h1, h2 {
+    color: rgba(58,75,91,1);
+    text-shadow: 2px 5px rgba(195, 195, 195, 0.64);
 }
 
-.default {
-    width: 600px;
-    display: block;
-    margin: 20px auto;
+#level, h2 {
+    animation: blinker 2s linear infinite;
+}
+
+@keyframes blinker {
+    50% { opacity: 0.0; }
 }
 
 #game_wrapper {
-    max-width: 770px;
-    max-height: 644;
-    background: url('imgs/hyperspace1.jpeg') no-repeat fixed;
+    position: relative;
+    width: 770px;
+    min-height: 500px;
+    background: url('imgs/starwarslogo.jpg') no-repeat fixed center;
     background-size: cover;
     padding: 20px 20px 20px 25px;
     border-radius: 5px;
@@ -41,9 +48,20 @@ h2, #counter {
 button {
     margin: 10px;
     padding: 0;
+    border: none;
     background: none;
+}
+
+button > img, button > a > img {
     border: 3px inset #505254;
     border-radius: 5px;
+}
+
+a {
+    cursor: inherit;
+}
+
+button, #board {
     cursor: url(imgs/lightsaber.png), auto;
 }
 
@@ -52,9 +70,18 @@ button:focus {
 }
 
 button:hover {
-    -webkit-transform: scale(0.9);
-    -ms-transform: scale(0.9);
-    transform: scale(0.9);
+    opacity: 0.65;
+}
+
+.activeBtn {
+    -webkit-transform: scale(0.85);
+    -ms-transform: scale(0.85);
+    transform: scale(0.85);
+    border: 2px solid #8E8E8E;
+}
+
+#board {
+    margin-bottom: 25px;
 }
 
 .tile_border {
@@ -77,8 +104,6 @@ button:hover {
     border-radius: 5px;
 }
 
-
-
 .bkground {
     content: url('imgs/starwarsbkground.png');
     border-radius: 5px;
@@ -87,6 +112,9 @@ button:hover {
 #counter {
     font-size: 30px;
     color: #ffe819;
-    margin: 0 0 10px 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 10px;
 }
 

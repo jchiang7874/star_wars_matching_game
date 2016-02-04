@@ -3,31 +3,30 @@ var initiate = ['c3po', 'darth_vader', 'jar_jar', 'leia', 'luke', 'obi', 'r2d2',
     knight = ['ackbar', 'c3po', 'darth_maul', 'darth_vader', 'ewoks', 'jar_jar', 'leia', 'luke', 'obi', 'r2d2', 'storm', 'yoda', 'bossk', 'ig88', 'boba', '!!boba', '!!bossk', '!!ig88', '!!ackbar', '!!c3po', '!!darth_maul', '!!darth_vader', '!!ewoks', '!!jar_jar', '!!leia', '!!luke', '!!obi', '!!r2d2', '!!storm', '!!yoda'],
     master = ['ackbar', 'c3po', 'darth_maul', 'darth_vader', 'ewoks', 'jar_jar', 'leia', 'luke', 'obi', 'r2d2', 'storm', 'yoda', 'bossk', 'ig88', 'boba', 'nien', 'thrawn', 'xizor', '!!xizor', '!!thrawn', '!!nien', '!!boba', '!!bossk', '!!ig88', '!!ackbar', '!!c3po', '!!darth_maul', '!!darth_vader', '!!ewoks', '!!jar_jar', '!!leia', '!!luke', '!!obi', '!!r2d2', '!!storm', '!!yoda'];
 
-var quotes = ['this is a new day, a new beginning. - ahsoka tano', 'stay on target. -gold five', 'great, kid. don\'t get cocky. -han solo', 'mind tricks don\'t work on me. -watto', 'never tell me the odds. -han solo', 'your eyes can deceive you. -obi-wan kenobi', 'So this is how liberty dies... -padm\xe9 amidala', 'it\'s a trap! -admiral ackbar',
-    'i\'ve got a bad feeling about this. -everyone', 'i find your lack of faith disturbing. -darth vader', 'there is no such thing as luck. -obi-wan kenobi', 'somebody has to save our skins. -leia organa', 'do. or do not. there is no try. -yoda', 'your focus determines your reality. -qui-gon jinn', 'it\'s not my fault. -han solo', 'fear is the path to the dark side. - yoda'];
-
 var memory_values = [],
     memory_tile_ids = [],
     tile_arr,
     tiles_flipped = 0,
     count = 0,
     counter_display = $("#counter")[0],
-    text_display = "Number of times clicked: ";
+    text_display = "Times clicked: ";
 
-var word_i = 0,
-    word_el = document.getElementById('word');
+
 
 $(document).ready(function() {
     default_tile();
-    wordSlide();
-    counter_display.innerHTML = "<p>Select a level to start</p> <p>May the Force be with you</p>"
+    counter_display.innerHTML = "<p>May the Force be with you</p>"
 });
 
-function default_tile() {
-    $("#board").append('<img src="imgs/starwarslogo.jpg" alt="default" class="default"/>');
 
+//----------------Default landing page----------------//
+function default_tile() {
+    $("#game_wrapper").css("background-image", "url(imgs/starwarslogo.jpg");
+    $("<h2>matching name to characters</h2>").insertAfter("#level");
 }
 
+
+//----------------Shuffle tiles----------------//
 Array.prototype.tile_shuffle = function () {
     var i, j, temp;
 
@@ -40,25 +39,8 @@ Array.prototype.tile_shuffle = function () {
 }
 
 
-function nextWord() {
-    console.log(quotes);
-    word_i++;
-    word_el.style.opacity = 0;
-    if (word_i > (quotes.length - 1)) {
-        word_i = 0;
-    }
-    setTimeout('wordSlide()', 1000);
-}
-
-function wordSlide() {
-    word_el.innerHTML = quotes[word_i];
-    word_el.style.opacity = 1;
-    setTimeout('nextWord()', 2000);
-}
-
+//----------------Flip and check matching tiles----------------//
 function flip_tile(tile, val) {
-    console.log(tile);
-    console.log(val);
     if (tile.className == "bkground") {
         tile.className = "img_tiles";
     } else {
@@ -117,9 +99,14 @@ function flip_tile(tile, val) {
     }
 }
 
-function generateBoard(arr) {
-    activeBtn(arr);
 
+//----------------Generate board according to level----------------//
+function generateBoard(arr) {
+    $("#game_wrapper").css("background-image", "url(imgs/hyperspace1.jpeg");
+    activeBtn(arr);
+    $("h2").remove();
+    $("#level").remove();
+    $("#force").text("may the force be with you");
     $("#board").empty();
     tile_arr = arr;
     arr.tile_shuffle();
@@ -127,44 +114,59 @@ function generateBoard(arr) {
     for (var i = 0; i < arr.length; i++) {
         $("#board").append('<div class="tile_border"><img src="imgs/'+arr[i]+'.png" alt="tiles" class="bkground" id="tile_'+i+'" onclick="flip_tile(this, \''+arr[i]+'\')"/></div>');
     }
+    count = 0;
     counter_display.innerText = text_display + count;
 }
 
+
+//----------------Change button color when active----------------//
 function activeBtn (arr) {
     if (arr.length == 18) {
-        $("#btn_initiate").attr('src', 'imgs/active_initiate.png');
-        $("#btn_appren").attr('src', 'imgs/appren.png');
-        $("#btn_knight").attr('src', 'imgs/knight.png');
-        $("#btn_master").attr('src', 'imgs/master.png');
+        $("#btn_initiate").attr('src', 'imgs/active_initiate.png').addClass('activeBtn');
+        $("#btn_appren").attr('src', 'imgs/appren.png').removeClass('activeBtn');
+        $("#btn_knight").attr('src', 'imgs/knight.png').removeClass('activeBtn');
+        $("#btn_master").attr('src', 'imgs/master.png').removeClass('activeBtn');
     } else if (arr.length == 24) {
-        $("#btn_initiate").attr('src', 'imgs/initiate.png');
-        $("#btn_appren").attr('src', 'imgs/active_appren.png');
-        $("#btn_knight").attr('src', 'imgs/knight.png');
-        $("#btn_master").attr('src', 'imgs/master.png');
+        $("#btn_initiate").attr('src', 'imgs/initiate.png').removeClass('activeBtn');
+        $("#btn_appren").attr('src', 'imgs/active_appren.png').addClass('activeBtn');
+        $("#btn_knight").attr('src', 'imgs/knight.png').removeClass('activeBtn');
+        $("#btn_master").attr('src', 'imgs/master.png').removeClass('activeBtn');
     } else if (arr.length == 30) {
-        $("#btn_initiate").attr('src', 'imgs/initiate.png');
-        $("#btn_appren").attr('src', 'imgs/appren.png');
-        $("#btn_knight").attr('src', 'imgs/active_knight.png');
-        $("#btn_master").attr('src', 'imgs/master.png');
+        $("#btn_initiate").attr('src', 'imgs/initiate.png').removeClass('activeBtn');
+        $("#btn_appren").attr('src', 'imgs/appren.png').removeClass('activeBtn');
+        $("#btn_knight").attr('src', 'imgs/active_knight.png').addClass('activeBtn');
+        $("#btn_master").attr('src', 'imgs/master.png').removeClass('activeBtn');
     } else {
-        $("#btn_initiate").attr('src', 'imgs/initiate.png');
-        $("#btn_appren").attr('src', 'imgs/appren.png');
-        $("#btn_knight").attr('src', 'imgs/knight.png');
-        $("#btn_master").attr('src', 'imgs/active_master.png');
+        $("#btn_initiate").attr('src', 'imgs/initiate.png').removeClass('activeBtn');
+        $("#btn_appren").attr('src', 'imgs/appren.png').removeClass('activeBtn');
+        $("#btn_knight").attr('src', 'imgs/knight.png').removeClass('activeBtn');
+        $("#btn_master").attr('src', 'imgs/active_master.png').addClass('activeBtn');
     }
 }
 
-function masterTiles() {
-    var master = document.getElementsByClassName('tile_border');
-    for (var i = 0; i < master.length; i++) {
-        master[i].className += " master";
-    }
-}
+/*
+
+ //----------------Word slide----------------//
+
+ var quotes = ['this is a new day, a new beginning. - ahsoka tano', 'stay on target. -gold five', 'great, kid. don\'t get cocky. -han solo', 'mind tricks don\'t work on me. -watto', 'never tell me the odds. -han solo', 'your eyes can deceive you. -obi-wan kenobi', 'So this is how liberty dies... -padm\xe9 amidala', 'it\'s a trap! -admiral ackbar',
+ 'i\'ve got a bad feeling about this. -everyone', 'i find your lack of faith disturbing. -darth vader', 'there is no such thing as luck. -obi-wan kenobi', 'somebody has to save our skins. -leia organa', 'do. or do not. there is no try. -yoda', 'your focus determines your reality. -qui-gon jinn', 'it\'s not my fault. -han solo', 'fear is the path to the dark side. - yoda'];
+
+ var word_i = 0,
+     word_el = document.getElementById('word');
 
 
+ function nextWord() {
+     word_i++;
+     word_el.style.opacity = 0;
+     if (word_i > (quotes.length - 1)) {
+        word_i = 0;
+     }
+     setTimeout('wordSlide()', 2000);
+ }
 
-
-
-
-
-
+ function wordSlide() {
+    word_el.innerHTML = quotes[word_i];
+    word_el.style.opacity = 1;
+    setTimeout('nextWord()', 2200);
+ }
+*/

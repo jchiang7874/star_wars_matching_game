@@ -4,24 +4,24 @@
     <title>Star Wars Matching Game</title>
     <link rel="stylesheet" href="style.css"/>
     <link href='https://fonts.googleapis.com/css?family=Arvo:700' rel='stylesheet' type='text/css'>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 </head>
 
 <body>
-    <h2 id="word"></h2>
+    <h1 id="level">Select a level to begin</h1>
+    <h1 id="force"></h1>
     <div id="game_wrapper">
         <div id="btn_wrapper">
             <button id="initiate" onclick="generateBoard(initiate)"><img src="imgs/initiate.png" alt="initiate" id="btn_initiate"/></button>
             <button id="apprentice" onclick="generateBoard(apprentice)"><img src="imgs/appren.png" alt="apprentice" id="btn_appren"/></button>
             <button id="knight" onclick="generateBoard(knight)"><a href="#board"><img src="imgs/knight.png" alt="knight" id="btn_knight"/></a></button>
-            <button id="master" onclick="generateBoard(master), masterTiles()"><a href="#board"><img src="imgs/master.png" alt="master" id="btn_master"/></a></button>
+            <button id="master" onclick="generateBoard(master)"><a href="#board"><img src="imgs/master.png" alt="master" id="btn_master"/></a></button>
         </div>
         <div id="board"></div>
-        <p id="counter"></p>
+        <div id="counter"></div>
     </div>
 
 
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="script.js"></script>
 </body>
 
