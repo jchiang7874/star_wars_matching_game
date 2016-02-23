@@ -10,8 +10,7 @@ var memory_values = [],
     count = 0,
     counter_display = $("#counter")[0],
     text_display = "Times clicked: ";
-
-
+var bk;
 
 $(document).ready(function() {
     default_tile();
@@ -22,7 +21,7 @@ $(document).ready(function() {
 //----------------Default landing page----------------//
 function default_tile() {
     $("#game_wrapper").css("background-image", "url(imgs/starwarslogo.jpg");
-    $("<h2>matching name to characters</h2>").insertAfter("#level");
+    $("<h2>match name to character</h2>").insertAfter("#level");
 }
 
 
@@ -52,6 +51,8 @@ function flip_tile(tile, val) {
         memory_tile_ids.push(tile.id);
 
         if (memory_values.length == 2) {
+            //$('.bkground').removeAttr('onclick');
+
             if(memory_values[0].charAt(0) === "!") {
                 memory_values[0] = memory_values[0].substr(2);
             } else if (memory_values[1].charAt(0) === "!") {
@@ -73,6 +74,9 @@ function flip_tile(tile, val) {
                     alert("Board cleared! Choose a level to generate new board.");
                     $("#board").empty();
                     default_tile();
+                    $("body").css("background-color", "#060a0c");
+                    $("body").css("background-image", "");
+                    //background: #060a0c no-repeat fixed center;
                     count = 0;
                     tiles_flipped = 0;
                     counter_display.innerText = text_display + count;
@@ -92,17 +96,23 @@ function flip_tile(tile, val) {
                     memory_tile_ids = [];
                     count++;
                     counter_display.innerText = text_display + count;
+
                 }
-                    setTimeout(flipBack, 400);
+                    setTimeout(flipBack, 450);
+
             }
         }
     }
 }
 
 
+
+
 //----------------Generate board according to level----------------//
+
 function generateBoard(arr) {
-    $("#game_wrapper").css("background-image", "url(imgs/hyperspace1.jpeg");
+    $("#game_wrapper").css("background-image", "none");
+    $("body").css("background-image", "url(imgs/hyperspace1.jpeg)");
     activeBtn(arr);
     $("h2").remove();
     $("#level").remove();
@@ -111,11 +121,22 @@ function generateBoard(arr) {
     tile_arr = arr;
     arr.tile_shuffle();
 
+console.log(arr);
     for (var i = 0; i < arr.length; i++) {
         $("#board").append('<div class="tile_border"><img src="imgs/'+arr[i]+'.png" alt="tiles" class="bkground" id="tile_'+i+'" onclick="flip_tile(this, \''+arr[i]+'\')"/></div>');
     }
+
+    if (arr.length == 36) {
+        $(".tile_border").css("margin", "10px");
+        $("#game_wrapper").css("width", "715px");
+    } else {
+        $(".tile_border").css("margin", "15px");
+        $("#game_wrapper").css("width", "770px");
+    }
+
     count = 0;
     counter_display.innerText = text_display + count;
+    return bk = $('.bkground');
 }
 
 
@@ -136,7 +157,7 @@ function activeBtn (arr) {
         $("#btn_appren").attr('src', 'imgs/appren.png').removeClass('activeBtn');
         $("#btn_knight").attr('src', 'imgs/active_knight.png').addClass('activeBtn');
         $("#btn_master").attr('src', 'imgs/master.png').removeClass('activeBtn');
-    } else {
+    } else if (arr.length == 36) {
         $("#btn_initiate").attr('src', 'imgs/initiate.png').removeClass('activeBtn');
         $("#btn_appren").attr('src', 'imgs/appren.png').removeClass('activeBtn');
         $("#btn_knight").attr('src', 'imgs/knight.png').removeClass('activeBtn');
@@ -170,3 +191,4 @@ function activeBtn (arr) {
     setTimeout('nextWord()', 2200);
  }
 */
+

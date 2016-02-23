@@ -10,6 +10,8 @@
 
 body {
     min-width: 850px;
+    background-size: cover;
+    background: #060a0c no-repeat fixed center;
 }
 
 h1, h2, #counter {
@@ -18,8 +20,9 @@ h1, h2, #counter {
 }
 
 h1, h2 {
-    color: rgba(58,75,91,1);
-    text-shadow: 2px 5px rgba(195, 195, 195, 0.64);
+    font-size: 30px;
+    color: #ffe819;
+    margin: 10px 0;
 }
 
 #level, h2 {
@@ -33,7 +36,7 @@ h1, h2 {
 #game_wrapper {
     position: relative;
     width: 770px;
-    min-height: 500px;
+    min-height: 520px;
     background: url('imgs/starwarslogo.jpg') no-repeat fixed center;
     background-size: cover;
     padding: 20px 20px 20px 25px;
@@ -82,6 +85,10 @@ button:hover {
 
 #board {
     margin-bottom: 25px;
+    min-height: 520px;
+    perspective: 3000px;
+    perspective-origin: 50% 200%;
+
 }
 
 .tile_border {
@@ -92,6 +99,8 @@ button:hover {
     border-radius: 5px;
     border: 1px solid #8E8E8E;
     cursor: url(imgs/lightsaber.png), auto;
+    transform: rotateX(40deg);
+    box-shadow: 2px -5px 5px #8A9EB3;
 }
 
 .tile_border.master {
@@ -107,6 +116,13 @@ button:hover {
 .bkground {
     content: url('imgs/starwarsbkground.png');
     border-radius: 5px;
+    backface-visibility: hidden;
+
+}
+
+.img_tiles {
+    transform: rotateX( 180deg );
+    transition: transform .3s ease-in-out 0s;
 }
 
 #counter {
@@ -115,6 +131,6 @@ button:hover {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 10px;
+    bottom: 0;
 }
 
